@@ -1,61 +1,18 @@
-<!-- Banner -->
-<p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&height=220&text=Hi%20I'm%20Gia%20Kiet%20👋&fontSize=50&fontAlignY=35&color=0:8e44ad,100:3498db&fontColor=ffffff&animation=fadeIn" />
-</p>
+# 💫 About Me:
+<!-- Banner --><br><p align="center"><br>  <img src="https://capsule-render.vercel.app/api?type=waving&height=220&text=Hi%20I'm%20Kevin%20👋&fontSize=50&fontAlignY=35&color=0:8e44ad,100:3498db&fontColor=ffffff&animation=fadeIn" /><br></p><br><br><!-- About Me --><br>## 👨‍💻 About Me<br><p align="center"><br>  <img src="https://media.giphy.com/media/qgQUggAC3Pfv687qPC/giphy.gif" width="300"/><br></p><br><br>✨ I'm a **Software Engineer** who loves turning ideas into reality through code.  <br>I enjoy exploring new technologies, building modern applications, and solving challenging problems.  <br><br>- 🔭 Currently working with **C#, .NET, NodeJS, Python, ExpressJS, mySQL, PostgreSQL, C++**  <br>- 🌍 Passionate about **web apps, cloud technologies, and AI-driven solutions**  <br>- ⚡ I thrive on **clean code, creative solutions, and continuous learning**  <br>- 🎯 My goal: **build impactful software that makes a difference**  <br>- ☕ Fun fact: I run on **coffee + code** 🖤  <br><br>---<br><br>## 🛠️ Tech Stack<br><br><p align="center"><br>  <img src="https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white" /><br>  <img src="https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" /><br>  <img src="https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white" /><br>  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" /><br>  <img src="https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white" /><br>  <img src="https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white" /><br>  <img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white" /><br>  <img src="https://img.shields.io/badge/C++-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white" /><br></p><br><br>## 🔥 GitHub Streak<br><br><p align="center"><br>  <img src="https://github-readme-streak-stats.herokuapp.com/?user=giekiwt&theme=tokyonight&hide_border=true" height="160"/><br></p><br><br>## 📈 Contribution Graph<br><p align="center"><br>    <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=giekiwt&theme=monokai" /><br></p><br><br>## 🌐 Connect with Me<br><p align="center"><br>  <a href="https://www.linkedin.com/in/gia-kiet-it-337342365/"><br>    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"/><br>  </a><br>  <a href="mailto:giakiethcb1@gmail.com"><br>    <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white"/><br>  </a><br>  <a href="https://www.facebook.com/giakiet1803/"><br>    <img src="https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white"/><br>  </a><br></p><br><p align="center"><br>  <img src="https://media.giphy.com/media/jRf5fsn8G6YaogAWxn/giphy.gif" width="200"/><br></p><br>
 
-<!-- About Me -->
-## 👨‍💻 About Me
-<p align="center">
-  <img src="https://media.giphy.com/media/qgQUggAC3Pfv687qPC/giphy.gif" width="300"/>
-</p>
 
-✨ I'm a **Software Engineer** who loves turning ideas into reality through code.  
-I enjoy exploring new technologies, building modern applications, and solving challenging problems.  
+## 🌐 Socials:
+[![Facebook](https://img.shields.io/badge/Facebook-%231877F2.svg?logo=Facebook&logoColor=white)](https://facebook.com/https://www.facebook.com/giakiet1803/) [![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?logo=Instagram&logoColor=white)](https://instagram.com/https://www.instagram.com/vgiakiwt_03/) [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://linkedin.com/in/https://www.linkedin.com/in/gia-kiet-it-337342365/) [![email](https://img.shields.io/badge/Email-D14836?logo=gmail&logoColor=white)](mailto:giakiethcb1@gmail.com) 
 
-- 🔭 Currently working with **C#, .NET, NodeJS, Python, ExpressJS, mySQL, PostgreSQL, C++**  
-- 🌍 Passionate about **web apps, cloud technologies, and AI-driven solutions**  
-- ⚡ I thrive on **clean code, creative solutions, and continuous learning**  
-- 🎯 My goal: **build impactful software that makes a difference**  
-- ☕ Fun fact: I run on **coffee + code** 🖤  
+# 💻 Tech Stack:
+![C#](https://img.shields.io/badge/c%23-%23239120.svg?style=for-the-badge&logo=csharp&logoColor=white) ![C++](https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white) ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white) ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white) ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E) ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![PowerShell](https://img.shields.io/badge/PowerShell-%235391FE.svg?style=for-the-badge&logo=powershell&logoColor=white) ![.Net](https://img.shields.io/badge/.NET-5C2D91?style=for-the-badge&logo=.net&logoColor=white) ![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens) ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white) ![Apache](https://img.shields.io/badge/apache-%23D42029.svg?style=for-the-badge&logo=apache&logoColor=white) ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white) ![MySQL](https://img.shields.io/badge/mysql-4479A1.svg?style=for-the-badge&logo=mysql&logoColor=white) ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white) ![MicrosoftSQLServer](https://img.shields.io/badge/Microsoft%20SQL%20Server-CC2927?style=for-the-badge&logo=microsoft%20sql%20server&logoColor=white) ![Notion](https://img.shields.io/badge/Notion-%23000000.svg?style=for-the-badge&logo=notion&logoColor=white) ![Jira](https://img.shields.io/badge/jira-%230A0FFF.svg?style=for-the-badge&logo=jira&logoColor=white) ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white) ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white) ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
+# 📊 GitHub Stats:
+![](https://github-readme-stats.vercel.app/api?username=giakietkevin&theme=dark&hide_border=false&include_all_commits=false&count_private=false)<br/>
+![](https://nirzak-streak-stats.vercel.app/?user=giakietkevin&theme=dark&hide_border=false)<br/>
+![](https://github-readme-stats.vercel.app/api/top-langs/?username=giakietkevin&theme=dark&hide_border=false&include_all_commits=false&count_private=false&layout=compact)
 
 ---
+[![](https://visitcount.itsvg.in/api?id=giakietkevin&icon=0&color=0)](https://visitcount.itsvg.in)
 
-## 🛠️ Tech Stack
-
-<p align="center">
-  <img src="https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white" />
-  <img src="https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" />
-  <img src="https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white" />
-  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" />
-  <img src="https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white" />
-  <img src="https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white" />
-  <img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white" />
-  <img src="https://img.shields.io/badge/C++-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white" />
-</p>
-
-## 🔥 GitHub Streak
-
-<p align="center">
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=giekiwt&theme=tokyonight&hide_border=true" height="160"/>
-</p>
-
-## 📈 Contribution Graph
-<p align="center">
-    <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=giekiwt&theme=monokai" />
-</p>
-
-## 🌐 Connect with Me
-<p align="center">
-  <a href="https://www.linkedin.com/in/gia-kiet-it-337342365/">
-    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"/>
-  </a>
-  <a href="mailto:giakiethcb1@gmail.com">
-    <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white"/>
-  </a>
-  <a href="https://www.facebook.com/giakiet1803/">
-    <img src="https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white"/>
-  </a>
-</p>
-<p align="center">
-  <img src="https://media.giphy.com/media/jRf5fsn8G6YaogAWxn/giphy.gif" width="200"/>
-</p>
+<!-- Proudly created with GPRM ( https://gprm.itsvg.in ) -->
