@@ -45,4 +45,8 @@ I enjoy exploring new technologies, building modern applications, and solving ch
   <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=giakietkevin&theme=dark&hide_border=false&layout=compact" alt="Most Used Languages" />
 </p>
 
+<p align="center">
 
+  <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExOTR3bHJtcGxwczJ0eXV2aWdiaDVsMmxtZnFmeHl0c3RiZDBrbzhzaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/qfLUF9PuBV9SRZKJcv/giphy.gif" />
+
+</p>
