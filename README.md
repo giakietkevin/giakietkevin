@@ -35,15 +35,11 @@ I enjoy exploring new technologies, building modern applications, and solving ch
 ## 📊 GitHub Stats:
 <p align="center">
   <img src="https://github-readme-stats.vercel.app/api?username=giakietkevin&show_icons=true&theme=dark&hide_border=false" alt="Kevin's GitHub Stats" />
-</p>
-
-<p align="center">
   <img src="https://github-readme-streak-stats.herokuapp.com/?user=giakietkevin&theme=dark&hide_border=false" alt="Kevin's Streak Stats" />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=giakietkevin&theme=dark&hide_border=false&layout=compact" alt="Most Used Languages length" />
 </p>
 
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=giakietkevin&theme=dark&hide_border=false&layout=compact" alt="Most Used Languages" />
-</p>
+
 
 <p align="center">
 
