@@ -10,7 +10,11 @@
 ✨ I'm a **Software Engineer** who loves turning ideas into reality through code.  
 I enjoy exploring new technologies, building modern applications, and solving challenging problems.  
 
-- 🔭 Currently working with **C#, .NET, NodeJS, Python, ExpressJS, mySQL, PostgreSQL, C++** - 🌍 Passionate about **web apps, cloud technologies, and AI-driven solutions** - ⚡ I thrive on **clean code, creative solutions, and continuous learning** - 🎯 My goal: **build impactful software that makes a difference** - ☕ Fun fact: I run on **coffee + code** 🖤  
+- 🔭 Currently working with **C#, .NET, NodeJS, Python, ExpressJS, MySQL, PostgreSQL, C++**
+- 🌍 Passionate about **web apps, cloud technologies, and AI-driven solutions**
+- ⚡ I thrive on **clean code, creative solutions, and continuous learning**
+- 🎯 My goal: **build impactful software that makes a difference**
+- ☕ Fun fact: I run on **coffee + code** 🖤  
 
 ---
 
@@ -27,15 +31,25 @@ I enjoy exploring new technologies, building modern applications, and solving ch
 </p>
 
 ## 🌐 Socials:
-[![Facebook](https://img.shields.io/badge/Facebook-%231877F2.svg?logo=Facebook&logoColor=white)](https://www.facebook.com/giakiet1803/) 
-[![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?logo=Instagram&logoColor=white)](https://www.instagram.com/vgiakiwt_03/) 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/gia-kiet-it-337342365/) 
-[![email](https://img.shields.io/badge/Email-D14836?logo=gmail&logoColor=white)](mailto:giakiethcb1@gmail.com)  
+<p align="center">
+<a href="https://www.facebook.com/giakiet1803/" target="blank"><img src="https://img.shields.io/badge/Facebook-%231877F2.svg?logo=Facebook&logoColor=white" alt="Facebook" /></a> 
+<a href="https://www.instagram.com/vgiakiwt_03/" target="blank"><img src="https://img.shields.io/badge/Instagram-%23E4405F.svg?logo=Instagram&logoColor=white" alt="Instagram" /></a> 
+<a href="https://www.linkedin.com/in/gia-kiet-it-337342365/" target="blank"><img src="https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white" alt="LinkedIn" /></a> 
+<a href="mailto:giakiethcb1@gmail.com"><img src="https://img.shields.io/badge/Email-D14836?logo=gmail&logoColor=white" alt="Email" /></a>
+</p>
 
 ## 📊 GitHub Stats:
-![](https://github-readme-stats.vercel.app/api?username=giakietkevin&theme=dark&hide_border=false&include_all_commits=false&count_private=false)
-![](https://nirzak-streak-stats.vercel.app/?user=giakietkevin&theme=dark&hide_border=false)
-![](https://github-readme-stats.vercel.app/api/top-langs/?username=giakietkevin&theme=dark&hide_border=false&include_all_commits=false&count_private=false&layout=compact)
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api?username=giakietkevin&show_icons=true&theme=dark&hide_border=false" alt="Kevin's GitHub Stats" />
+</p>
+
+<p align="center">
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=giakietkevin&theme=dark&hide_border=false" alt="Kevin's Streak Stats" />
+</p>
+
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=giakietkevin&theme=dark&hide_border=false&layout=compact" alt="Most Used Languages" />
+</p>
 
 ---
 <p align="center">
