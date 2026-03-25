@@ -10,11 +10,7 @@
 ✨ I'm a **Software Engineer** who loves turning ideas into reality through code.  
 I enjoy exploring new technologies, building modern applications, and solving challenging problems.  
 
-- 🔭 Currently working with **C#, .NET, NodeJS, Python, ExpressJS, MySQL, PostgreSQL, C++**
-- 🌍 Passionate about **web apps, cloud technologies, and AI-driven solutions**
-- ⚡ I thrive on **clean code, creative solutions, and continuous learning**
-- 🎯 My goal: **build impactful software that makes a difference**
-- ☕ Fun fact: I run on **coffee + code** 🖤  
+- 🔭 Currently working with **C#, .NET, NodeJS, Python, ExpressJS, mySQL, PostgreSQL, C++** - 🌍 Passionate about **web apps, cloud technologies, and AI-driven solutions** - ⚡ I thrive on **clean code, creative solutions, and continuous learning** - 🎯 My goal: **build impactful software that makes a difference** - ☕ Fun fact: I run on **coffee + code** 🖤  
 
 ---
 
@@ -31,12 +27,10 @@ I enjoy exploring new technologies, building modern applications, and solving ch
 </p>
 
 ## 🌐 Socials:
-<p align="center">
-<a href="https://www.facebook.com/giakiet1803/" target="blank"><img src="https://img.shields.io/badge/Facebook-%231877F2.svg?logo=Facebook&logoColor=white" alt="Facebook" /></a> 
-<a href="https://www.instagram.com/vgiakiwt_03/" target="blank"><img src="https://img.shields.io/badge/Instagram-%23E4405F.svg?logo=Instagram&logoColor=white" alt="Instagram" /></a> 
-<a href="https://www.linkedin.com/in/gia-kiet-it-337342365/" target="blank"><img src="https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white" alt="LinkedIn" /></a> 
-<a href="mailto:giakiethcb1@gmail.com"><img src="https://img.shields.io/badge/Email-D14836?logo=gmail&logoColor=white" alt="Email" /></a>
-</p>
+[![Facebook](https://img.shields.io/badge/Facebook-%231877F2.svg?logo=Facebook&logoColor=white)](https://www.facebook.com/giakiet1803/) 
+[![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?logo=Instagram&logoColor=white)](https://www.instagram.com/vgiakiwt_03/) 
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/gia-kiet-it-337342365/) 
+[![email](https://img.shields.io/badge/Email-D14836?logo=gmail&logoColor=white)](mailto:giakiethcb1@gmail.com)  
 
 ## 📊 GitHub Stats:
 <p align="center">
@@ -51,7 +45,4 @@ I enjoy exploring new technologies, building modern applications, and solving ch
   <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=giakietkevin&theme=dark&hide_border=false&layout=compact" alt="Most Used Languages" />
 </p>
 
----
-<p align="center">
-  <img src="https://visitcount.itsvg.in/api?id=giakietkevin&icon=0&color=0" />
-</p>
+
