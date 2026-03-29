@@ -62,6 +62,24 @@ I enjoy exploring new technologies, building modern applications, and solving ch
 
 ---
 
+## 📊 GitHub Stats:
+<div align="center">
+  <table border="0">
+      <td align="center" colspan="2">
+         <td align="center">
+        <img src="https://github-readme-streak-stats.herokuapp.com/?user=giakietkevin&theme=dark&hide_border=false" alt="Kevin's Streak Stats" />
+      </td>
+      <td align="center">
+        <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=giakietkevin&theme=dark&hide_border=false&layout=compact" alt="Most Used Languages" />
+      </td>
+      </td>
+    </tr>
+    <tr>
+  </table>
+</div>
+
+---
+
 ## 🌐 Socials:
 <p align="center">
 <a href="https://www.facebook.com/giakiet1803/" target="blank"><img src="https://img.shields.io/badge/Facebook-%231877F2.svg?logo=Facebook&logoColor=white" /></a> 
@@ -70,31 +88,11 @@ I enjoy exploring new technologies, building modern applications, and solving ch
 <a href="mailto:giakiethcb1@gmail.com"><img src="https://img.shields.io/badge/Email-D14836?logo=gmail&logoColor=white" /></a>
 </p>
 
-## 📊 GitHub Stats:
-<div align="center">
-  <table border="0">
-    <tr>
-      <td align="center" colspan="2">
-        <img src="https://github-readme-stats.vercel.app/api?username=giakietkevin&show_icons=true&theme=dark&hide_border=false&count_private=true" alt="Kevin's GitHub Stats" />
-      </td>
-    </tr>
-    <tr>
-      <td align="center">
-        <img src="https://github-readme-streak-stats.herokuapp.com/?user=giakietkevin&theme=dark&hide_border=false" alt="Kevin's Streak Stats" />
-      </td>
-      <td align="center">
-        <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=giakietkevin&theme=dark&hide_border=false&layout=compact" alt="Most Used Languages" />
-      </td>
-    </tr>
-  </table>
-</div>
-
 <p align="center">
   <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExOTR3bHJtcGxwczJ0eXV2aWdiaDVsMmxtZnFmeHl0c3RiZDBrbzhzaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/qfLUF9PuBV9SRZKJcv/giphy.gif" width="600" />
 </p>
 
----
 <p align="center">
   <b>Let's build something amazing together!</b><br>
-  <img src="https://visitcount.itsvg.in/api?id=giakietkevin&icon=0&color=0" />
+  
 </p>
