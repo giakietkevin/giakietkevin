@@ -14,21 +14,53 @@ I enjoy exploring new technologies, building modern applications, and solving ch
 - 🌍 Passionate about **web apps, cloud technologies, and AI-driven solutions**
 - ⚡ I thrive on **clean code, creative solutions, and continuous learning**
 - 🎯 My goal: **build impactful software that makes a difference**
-- ☕ Fun fact: I run on **coffee + code** 🖤  
+- ☕ Fun fact: `while(coffee) { code(); }` 🖤  
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠️ Tech Stack & Skills
 <p align="center">
   <img src="https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white" />
   <img src="https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" />
   <img src="https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white" />
   <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" />
-  <img src="https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white" />
+  <br>
   <img src="https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white" />
   <img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white" />
+  <img src="https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white" />
   <img src="https://img.shields.io/badge/C++-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white" />
 </p>
+
+---
+
+## 🚀 Featured Projects
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <h3>🛒 TechStore</h3>
+      <p>An e-commerce web application focused on electronic components.</p>
+      <p><b>Stack:</b> ReactJS, NodeJS, ExpressJS, MySQL</p>
+    </td>
+    <td width="50%" valign="top">
+      <h3>💼 Kevin IT Job</h3>
+      <p>An IT job search platform designed to connect developers with opportunities.</p>
+      <p><b>Stack:</b> .NET Core, C#, PostgreSQL</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <h3>🧠 MoodBasedRecommender</h3>
+      <p>AI-driven solution for recommending content based on user mood.</p>
+      <p><b>Stack:</b> Python, AI Models, Hugging Face</p>
+    </td>
+    <td width="50%" valign="top">
+      <h3>📂 More coming soon...</h3>
+      <p>Exploring new ideas and building something amazing!</p>
+    </td>
+  </tr>
+</table>
+
+---
 
 ## 🌐 Socials:
 <p align="center">
@@ -39,22 +71,23 @@ I enjoy exploring new technologies, building modern applications, and solving ch
 </p>
 
 ## 📊 GitHub Stats:
-
-<table align="center">
-  <tr>
-    <td align="left" colspan="2">
-      <img src="https://github-readme-stats.vercel.app/api?username=giakietkevin&show_icons=true&theme=dark&hide_border=false" alt="Kevin's GitHub Stats" />
-    </td>
-  </tr>
-  <tr>
-    <td align="leftr">
-      <img src="https://github-readme-streak-stats.herokuapp.com/?user=giakietkevin&theme=dark&hide_border=false" alt="Kevin's Streak Stats" />
-    </td>
-    <td align="center">
-      <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=giakietkevin&theme=dark&hide_border=false&layout=compact" alt="Most Used Languages" />
-    </td>
-  </tr>
-</table>
+<div align="center">
+  <table border="0">
+    <tr>
+      <td align="center" colspan="2">
+        <img src="https://github-readme-stats.vercel.app/api?username=giakietkevin&show_icons=true&theme=dark&hide_border=false&count_private=true" alt="Kevin's GitHub Stats" />
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        <img src="https://github-readme-streak-stats.herokuapp.com/?user=giakietkevin&theme=dark&hide_border=false" alt="Kevin's Streak Stats" />
+      </td>
+      <td align="center">
+        <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=giakietkevin&theme=dark&hide_border=false&layout=compact" alt="Most Used Languages" />
+      </td>
+    </tr>
+  </table>
+</div>
 
 <p align="center">
   <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExOTR3bHJtcGxwczJ0eXV2aWdiaDVsMmxtZnFmeHl0c3RiZDBrbzhzaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/qfLUF9PuBV9SRZKJcv/giphy.gif" width="600" />
@@ -62,5 +95,6 @@ I enjoy exploring new technologies, building modern applications, and solving ch
 
 ---
 <p align="center">
+  <b>Let's build something amazing together!</b><br>
   <img src="https://visitcount.itsvg.in/api?id=giakietkevin&icon=0&color=0" />
 </p>
