@@ -33,50 +33,13 @@ I enjoy exploring new technologies, building modern applications, and solving ch
 
 ---
 
-## 🚀 Featured Projects
-<table>
-  <tr>
-    <td width="50%" valign="top">
-      <h3>🛒 TechStore</h3>
-      <p>An e-commerce web application focused on electronic components.</p>
-      <p><b>Stack:</b> ReactJS, NodeJS, ExpressJS, MySQL</p>
-    </td>
-    <td width="50%" valign="top">
-      <h3>💼 Kevin IT Job</h3>
-      <p>An IT job search platform designed to connect developers with opportunities.</p>
-      <p><b>Stack:</b> .NET Core, C#, PostgreSQL</p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <h3>🧠 MoodBasedRecommender</h3>
-      <p>AI-driven solution for recommending content based on user mood.</p>
-      <p><b>Stack:</b> Python, AI Models, Hugging Face</p>
-    </td>
-    <td width="50%" valign="top">
-      <h3>📂 More coming soon...</h3>
-      <p>Exploring new ideas and building something amazing!</p>
-    </td>
-  </tr>
-</table>
-
----
 
 ## 📊 GitHub Stats:
-<div align="center">
-  <table border="0">
-      <td align="center" colspan="2">
-         <td align="center">
-        <img src="https://github-readme-streak-stats.herokuapp.com/?user=giakietkevin&theme=dark&hide_border=false" alt="Kevin's Streak Stats" />
-      </td>
-      <td align="center">
-        <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=giakietkevin&theme=dark&hide_border=false&layout=compact" alt="Most Used Languages" />
-      </td>
-      </td>
-    </tr>
-    <tr>
-  </table>
-</div>
+<p align="center">
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=giakietkevin&theme=dark" alt="Streak Stats" />
+</p>
+
+
 
 ---
 
