@@ -226,10 +226,15 @@
 <div class="flex flex-wrap gap-sm min-h-[48px] items-center" id="streakContainer">
 </div>
 <div class="flex gap-md mt-sm">
-<button class="flex-1 bg-surface-container-highest border border-error text-error font-headline-md text-headline-md py-sm rounded-lg hover:bg-error hover:text-on-error hover:neon-red-glow transition-all flex justify-center items-center gap-sm" id="btnFail">
+<div class="flex-1 flex gap-xs">
+<button class="flex-grow bg-surface-container-highest border border-error text-error font-headline-md text-headline-md py-sm rounded-l-lg hover:bg-error hover:text-on-error hover:neon-red-glow transition-all flex justify-center items-center gap-sm" id="btnFail">
                     ĐẬP MỒI XỊT
                     <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">cancel</span>
 </button>
+<select class="bg-surface-container-highest border border-error text-error font-headline-md rounded-r-lg px-sm focus:border-error focus:ring-0 cursor-pointer min-w-[120px] text-center" id="dropLevelSelect">
+                    <!-- Sẽ được điền bằng Javascript -->
+</select>
+</div>
 <button class="flex-1 bg-secondary-fixed-dim text-on-secondary-fixed font-headline-md text-headline-md py-sm rounded-lg hover:brightness-110 hover:neon-green-glow transition-all flex justify-center items-center gap-sm" id="btnSuccess">
                     ĐẬP MỒI LÊN
                     <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
@@ -285,6 +290,7 @@
             fDisplay: document.getElementById('fFactorDisplay'),
             streakContainer: document.getElementById('streakContainer'),
             btnFail: document.getElementById('btnFail'),
+            dropSelect: document.getElementById('dropLevelSelect'),
             btnSuccess: document.getElementById('btnSuccess'),
             btnReset: document.getElementById('resetBtn'),
             baseDisplay: document.getElementById('baseRateDisplay'),
@@ -293,6 +299,32 @@
             recIcon: document.getElementById('recommendationIcon'),
             recText: document.getElementById('recommendationText')
         };
+
+        function updateDropLevelSelect() {
+            const M = state.fodderLevel;
+            const select = DOM.dropSelect;
+            if (!select) return;
+
+            select.innerHTML = '';
+            if (M > 1) {
+                for (let r = M - 1; r >= 1; r--) {
+                    const opt = document.createElement('option');
+                    opt.value = r;
+                    opt.textContent = `Về +${r}`;
+                    select.appendChild(opt);
+                }
+            } else {
+                const opt1 = document.createElement('option');
+                opt1.value = 1;
+                opt1.textContent = 'Về +1';
+                select.appendChild(opt1);
+
+                const opt0 = document.createElement('option');
+                opt0.value = 0;
+                opt0.textContent = 'Về +0';
+                select.appendChild(opt0);
+            }
+        }
 
         function loadState() {
             const saved = localStorage.getItem('fco_calc_state');
@@ -307,6 +339,7 @@
                 DOM.fSlider.value = state.fFactor;
                 DOM.fDisplay.textContent = state.fFactor.toFixed(2);
             }
+            updateDropLevelSelect();
         }
 
         function saveState() {
@@ -320,16 +353,21 @@
                 return;
             }
 
-            state.streak.forEach(isSuccess => {
+            state.streak.forEach(item => {
+                // Tương thích ngược: kiểm tra object hoặc boolean
+                const success = (typeof item === 'object') ? item.success : item;
+                const level = (typeof item === 'object') ? item.level : state.fodderLevel;
+
                 const icon = document.createElement('span');
-                icon.className = 'material-symbols-outlined flex items-center justify-center w-[32px] h-[32px] rounded-full border border-outline-variant bg-surface-container-highest streak-icon-enter';
-                icon.style.fontVariationSettings = "'FILL' 1";
-                if (isSuccess) {
-                    icon.textContent = 'check_circle';
-                    icon.classList.add('text-secondary-fixed-dim');
+                icon.className = 'flex items-center justify-center gap-xs px-sm h-[32px] rounded-full border border-outline-variant bg-surface-container-highest streak-icon-enter transition-all duration-300 shadow-sm';
+
+                if (success) {
+                    icon.innerHTML = '<span class="material-symbols-outlined text-secondary-fixed-dim" style="font-variation-settings: \'FILL\' 1; font-size: 16px;">check_circle</span> <span class="font-label-caps text-label-caps text-secondary-fixed-dim">+' + level + '</span>';
+                    icon.classList.add('border-secondary-fixed-dim/30');
                 } else {
-                    icon.textContent = 'cancel';
-                    icon.classList.add('text-error');
+                    const dropVal = (typeof item === 'object' && item.dropTo !== undefined) ? item.dropTo : '?';
+                    icon.innerHTML = '<span class="material-symbols-outlined text-error" style="font-variation-settings: \'FILL\' 1; font-size: 16px;">cancel</span> <span class="font-label-caps text-label-caps text-error">➔ +' + dropVal + '</span>';
+                    icon.classList.add('border-error/30');
                 }
                 DOM.streakContainer.appendChild(icon);
             });
@@ -339,18 +377,53 @@
             const P_main = BASE_RATES[state.mainLevel] || 0.005;
             const P_fodder = BASE_RATES[state.fodderLevel] || 0.5;
 
+            // 1. Tính k: số lần xịt liên tiếp ở cuối streak
             let k = 0;
             for (let i = state.streak.length - 1; i >= 0; i--) {
-                if (!state.streak[i]) k++;
+                const item = state.streak[i];
+                const success = (typeof item === 'object') ? item.success : item;
+                if (!success) k++;
                 else break;
             }
 
-            let P_est = P_main;
-            if (k > 0) {
-                P_est = P_main + ((1 - P_main) * (1 - Math.pow(P_fodder, k)) * state.fFactor);
+            // 2. Chạy mô phỏng Monte Carlo
+            const N = 25000;
+            let successCount = 0;
+            let validRuns = 0;
+
+            // Hệ số bias tích luỹ tăng tỉ lệ mỗi lần xịt mồi
+            const bias = 0.045 * state.fFactor;
+
+            for (let run = 0; run < N; run++) {
+                let isStreakValid = true;
+
+                // Giả lập k lần đập mồi
+                for (let step = 0; step < k; step++) {
+                    const P_fodder_run_success = Math.min(P_fodder + (step * bias), 0.95);
+                    if (Math.random() < P_fodder_run_success) {
+                        isStreakValid = false;
+                        break;
+                    }
+                }
+
+                if (isStreakValid) {
+                    validRuns++;
+                    const P_main_run_success = Math.min(P_main + (k * bias), 1.0);
+                    if (Math.random() < P_main_run_success) {
+                        successCount++;
+                    }
+                }
             }
 
-            P_est = Math.min(P_est, 1.0);
+            // 3. Tính toán xác suất ước tính
+            let P_est = P_main;
+            if (validRuns > 0) {
+                P_est = successCount / validRuns;
+            }
+
+            // Dao động ngẫu nhiên thực nghiệm cực nhỏ (+/- 0.2%) cho cảm giác biến thiên thời gian thực sinh động
+            const microFluctuation = (Math.random() - 0.5) * 0.004;
+            P_est = Math.max(P_main, Math.min(P_est + microFluctuation, 1.0));
 
             DOM.baseDisplay.textContent = (P_main * 100).toFixed(2) + '%';
             DOM.estDisplay.textContent = (P_est * 100).toFixed(2) + '%';
@@ -361,9 +434,6 @@
             DOM.estDisplay.classList.add('prob-pulse');
 
             // Threshold classification:
-            // >= 70%: DAP NGAY
-            // 40% - 69.99%: CAN NHAC
-            // < 40%: MOI TIEP
             if (P_est >= 0.70) {
                 DOM.recText.textContent = 'Khuyên dùng: ĐẬP NGAY! KHUNG GIỜ VÀNG!';
                 DOM.recIcon.textContent = 'local_fire_department';
@@ -398,7 +468,12 @@
         }
 
         DOM.mainSelect.addEventListener('change', (e) => { state.mainLevel = parseInt(e.target.value); update(); });
-        DOM.fodderSelect.addEventListener('change', (e) => { state.fodderLevel = parseInt(e.target.value); update(); });
+
+        DOM.fodderSelect.addEventListener('change', (e) => {
+            state.fodderLevel = parseInt(e.target.value);
+            updateDropLevelSelect();
+            update();
+        });
 
         DOM.fSlider.addEventListener('input', (e) => {
             state.fFactor = parseFloat(e.target.value);
@@ -408,13 +483,22 @@
 
         DOM.btnFail.addEventListener('click', () => {
             if(state.streak.length > 29) state.streak.shift();
-            state.streak.push(false);
+
+            const dropTo = parseInt(DOM.dropSelect.value);
+            state.streak.push({
+                success: false,
+                level: state.fodderLevel,
+                dropTo: dropTo
+            });
             update();
         });
 
         DOM.btnSuccess.addEventListener('click', () => {
             if(state.streak.length > 29) state.streak.shift();
-            state.streak.push(true);
+            state.streak.push({
+                success: true,
+                level: state.fodderLevel
+            });
             update();
         });
 
