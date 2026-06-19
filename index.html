@@ -6,6 +6,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -218,14 +219,11 @@
 <section class="glass-card rounded-xl p-md flex flex-col gap-md">
 <div class="flex justify-between items-center border-b border-outline-variant pb-sm">
 <h2 class="font-headline-md text-headline-md text-on-surface">Dây mồi hiện tại</h2>
-<button class="flex items-center gap-xs text-on-surface-variant hover:text-inverse-surface font-label-caps text-label-caps transition-colors" id="resetBtn">
-<span class="material-symbols-outlined" style="font-size: 16px;">refresh</span>
-                    RESET
-                </button>
 </div>
 <div class="flex flex-wrap gap-sm min-h-[48px] items-center" id="streakContainer">
 </div>
-<div class="flex gap-md mt-sm">
+<div class="flex gap-md mt-sm flex-col">
+<div class="flex gap-md">
 <div class="flex-1 flex gap-xs">
 <button class="flex-grow bg-surface-container-highest border border-error text-error font-headline-md text-headline-md py-sm rounded-l-lg hover:bg-error hover:text-on-error hover:neon-red-glow transition-all flex justify-center items-center gap-sm" id="btnFail">
                     ĐẬP MỒI XỊT
@@ -238,6 +236,11 @@
 <button class="flex-1 bg-secondary-fixed-dim text-on-secondary-fixed font-headline-md text-headline-md py-sm rounded-lg hover:brightness-110 hover:neon-green-glow transition-all flex justify-center items-center gap-sm" id="btnSuccess">
                     ĐẬP MỒI LÊN
                     <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</button>
+</div>
+<button class="w-full bg-surface-container-highest border border-outline text-on-surface-variant font-headline-md text-headline-md py-sm rounded-lg hover:bg-outline-variant hover:text-on-surface transition-all flex justify-center items-center gap-sm" id="btnResetBig">
+                    RESET DÂY MỒI
+                    <span class="material-symbols-outlined">restart_alt</span>
 </button>
 </div>
 </section>
@@ -256,6 +259,15 @@
 <div class="z-10 rounded-lg px-lg py-sm flex items-center gap-sm mt-sm transition-all duration-300" id="recommendationBox">
 <span class="material-symbols-outlined text-secondary-fixed-dim" id="recommendationIcon" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
 <span class="font-headline-md text-headline-md text-on-surface" id="recommendationText">Khuyên dùng: ĐẬP NGAY!</span>
+</div>
+</section>
+<section class="glass-card rounded-xl p-md flex flex-col gap-md">
+<div class="flex justify-between items-center border-b border-outline-variant pb-sm">
+<h2 class="font-headline-md text-headline-md text-on-surface">Xu hướng biến động xác suất</h2>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Biểu đồ đường</span>
+</div>
+<div class="w-full relative h-[220px] md:h-[280px]">
+<canvas id="probChart"></canvas>
 </div>
 </section>
 </main>
@@ -292,13 +304,191 @@
             btnFail: document.getElementById('btnFail'),
             dropSelect: document.getElementById('dropLevelSelect'),
             btnSuccess: document.getElementById('btnSuccess'),
-            btnReset: document.getElementById('resetBtn'),
+            btnReset: document.getElementById('btnResetBig'),
             baseDisplay: document.getElementById('baseRateDisplay'),
             estDisplay: document.getElementById('estRateDisplay'),
             recBox: document.getElementById('recommendationBox'),
             recIcon: document.getElementById('recommendationIcon'),
             recText: document.getElementById('recommendationText')
         };
+
+        let chartInstance = null;
+
+        function initChart() {
+            const ctx = document.getElementById('probChart').getContext('2d');
+            const gridColor = 'rgba(255, 255, 255, 0.06)';
+            const textColor = '#79788d';
+
+            chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Gốc'],
+                    datasets: [{
+                        label: 'Tỷ lệ ước tính (%)',
+                        data: [0],
+                        borderColor: '#00e479',
+                        borderWidth: 2.5,
+                        backgroundColor: 'rgba(0, 228, 121, 0.06)',
+                        fill: true,
+                        tension: 0.35,
+                        pointBackgroundColor: '#00e479',
+                        pointBorderColor: '#0d1229',
+                        pointBorderWidth: 2,
+                        pointRadius: 4,
+                        pointHoverRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            backgroundColor: '#151a32',
+                            titleColor: '#dde1ff',
+                            bodyColor: '#00e479',
+                            borderColor: 'rgba(255, 255, 255, 0.1)',
+                            borderWidth: 1,
+                            titleFont: { family: 'Space Grotesk', size: 13 },
+                            bodyFont: { family: 'Inter', size: 13 },
+                            callbacks: {
+                                label: function(context) {
+                                    return `Tỷ lệ: ${context.parsed.y.toFixed(2)}%`;
+                                },
+                                title: function(context) {
+                                    const idx = context[0].dataIndex;
+                                    if (idx === 0) return 'Tỷ lệ gốc ban đầu';
+                                    const streakItem = state.streak[idx - 1];
+                                    if (!streakItem) return '';
+                                    if (streakItem.success) {
+                                        return `Lượt ${idx}: Mồi +${streakItem.level} LÊN`;
+                                    } else {
+                                        return `Lượt ${idx}: Mồi +${streakItem.level} XỊT (➔ +${streakItem.dropTo})`;
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                color: gridColor
+                            },
+                            ticks: {
+                                color: textColor,
+                                font: { family: 'Space Grotesk', size: 11 }
+                            }
+                        },
+                        y: {
+                            min: 0,
+                            max: 100,
+                            grid: {
+                                color: gridColor
+                            },
+                            ticks: {
+                                color: textColor,
+                                font: { family: 'Space Grotesk', size: 11 },
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateChartData(currentPEst) {
+            if (!chartInstance) return;
+
+            const data = [];
+            const labels = ['Gốc'];
+
+            const P_main = BASE_RATES[state.mainLevel] || 0.005;
+            data.push(P_main * 100);
+
+            // Tính xác suất tích luỹ tại mỗi bước trong lịch sử
+            for (let i = 1; i <= state.streak.length; i++) {
+                const subStreak = state.streak.slice(0, i);
+
+                // Giả lập Monte Carlo rút gọn (5k lượt để tối ưu hiệu năng) cho từng điểm phụ
+                let k = 0;
+                for (let j = subStreak.length - 1; j >= 0; j--) {
+                    if (!subStreak[j].success) k++;
+                    else break;
+                }
+
+                // Nếu là điểm cuối cùng của streak hiện tại, ta lấy luôn P_est thực tế vừa tính để tránh tính lại
+                if (i === state.streak.length) {
+                    data.push(currentPEst * 100);
+                } else {
+                    const P_fodder = BASE_RATES[state.fodderLevel] || 0.5;
+                    const N_sim = 4000;
+                    let successCount = 0;
+                    let validRuns = 0;
+                    const bias = 0.045 * state.fFactor;
+
+                    for (let run = 0; run < N_sim; run++) {
+                        let isStreakValid = true;
+                        for (let step = 0; step < k; step++) {
+                            const P_fodder_run_success = Math.min(P_fodder + (step * bias), 0.95);
+                            if (Math.random() < P_fodder_run_success) {
+                                isStreakValid = false;
+                                break;
+                            }
+                        }
+
+                        if (isStreakValid) {
+                            validRuns++;
+                            const P_main_run_success = Math.min(P_main + (k * bias), 1.0);
+                            if (Math.random() < P_main_run_success) {
+                                successCount++;
+                            }
+                        }
+                    }
+
+                    let P_est_step = P_main;
+                    if (validRuns > 0) {
+                        P_est_step = successCount / validRuns;
+                    }
+                    data.push(P_est_step * 100);
+                }
+
+                const item = subStreak[i - 1];
+                if (item.success) {
+                    labels.push(`L${i} (+${item.level} ✅)`);
+                } else {
+                    labels.push(`L${i} (❌➔${item.dropTo})`);
+                }
+            }
+
+            chartInstance.data.labels = labels;
+            chartInstance.data.datasets[0].data = data;
+
+            // Đổi màu đường line theo tỷ lệ ước tính cuối cùng
+            const finalVal = data[data.length - 1];
+            let color = '#00e479'; // Green
+            let bgColor = 'rgba(0, 228, 121, 0.06)';
+
+            if (finalVal >= 70) {
+                color = '#00e479';
+                bgColor = 'rgba(0, 228, 121, 0.06)';
+            } else if (finalVal >= 40) {
+                color = '#ffb300'; // Amber
+                bgColor = 'rgba(255, 179, 0, 0.06)';
+            } else {
+                color = '#79788d'; // Dim
+                bgColor = 'rgba(121, 120, 141, 0.04)';
+            }
+
+            chartInstance.data.datasets[0].borderColor = color;
+            chartInstance.data.datasets[0].backgroundColor = bgColor;
+            chartInstance.data.datasets[0].pointBackgroundColor = color;
+
+            chartInstance.update('none'); // Update tĩnh, mượt mà
+        }
 
         function updateDropLevelSelect() {
             const M = state.fodderLevel;
@@ -354,7 +544,6 @@
             }
 
             state.streak.forEach(item => {
-                // Tương thích ngược: kiểm tra object hoặc boolean
                 const success = (typeof item === 'object') ? item.success : item;
                 const level = (typeof item === 'object') ? item.level : state.fodderLevel;
 
@@ -391,13 +580,11 @@
             let successCount = 0;
             let validRuns = 0;
 
-            // Hệ số bias tích luỹ tăng tỉ lệ mỗi lần xịt mồi
             const bias = 0.045 * state.fFactor;
 
             for (let run = 0; run < N; run++) {
                 let isStreakValid = true;
 
-                // Giả lập k lần đập mồi
                 for (let step = 0; step < k; step++) {
                     const P_fodder_run_success = Math.min(P_fodder + (step * bias), 0.95);
                     if (Math.random() < P_fodder_run_success) {
@@ -415,25 +602,21 @@
                 }
             }
 
-            // 3. Tính toán xác suất ước tính
             let P_est = P_main;
             if (validRuns > 0) {
                 P_est = successCount / validRuns;
             }
 
-            // Dao động ngẫu nhiên thực nghiệm cực nhỏ (+/- 0.2%) cho cảm giác biến thiên thời gian thực sinh động
             const microFluctuation = (Math.random() - 0.5) * 0.004;
             P_est = Math.max(P_main, Math.min(P_est + microFluctuation, 1.0));
 
             DOM.baseDisplay.textContent = (P_main * 100).toFixed(2) + '%';
             DOM.estDisplay.textContent = (P_est * 100).toFixed(2) + '%';
 
-            // Trigger pulse animation
             DOM.estDisplay.classList.remove('prob-pulse');
-            void DOM.estDisplay.offsetWidth; // force reflow
+            void DOM.estDisplay.offsetWidth;
             DOM.estDisplay.classList.add('prob-pulse');
 
-            // Threshold classification:
             if (P_est >= 0.70) {
                 DOM.recText.textContent = 'Khuyên dùng: ĐẬP NGAY! KHUNG GIỜ VÀNG!';
                 DOM.recIcon.textContent = 'local_fire_department';
@@ -459,6 +642,9 @@
                 DOM.estDisplay.classList.add('text-on-surface');
                 DOM.estDisplay.classList.remove('glow-text-green', 'glow-text-amber');
             }
+
+            // Vẽ lại biểu đồ
+            updateChartData(P_est);
         }
 
         function update() {
@@ -504,7 +690,9 @@
 
         DOM.btnReset.addEventListener('click', () => { state.streak = []; update(); });
 
+        // Khởi động
         loadState();
+        initChart();
         update();
     </script>
 </body></html>
