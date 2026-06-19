@@ -1,11 +1,9 @@
 <!DOCTYPE html>
-
 <html class="dark" lang="vi"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>FC PROBABILITY HUB</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script id="tailwind-config">
@@ -117,8 +115,37 @@
         .neon-red-glow {
             box-shadow: 0 0 15px theme('colors.error');
         }
+        .neon-amber-glow {
+            box-shadow: 0 0 15px #ffb300;
+        }
         .glow-text-green {
             text-shadow: 0 0 10px theme('colors.secondary-fixed-dim');
+        }
+        .glow-text-amber {
+            text-shadow: 0 0 10px #ffb300;
+        }
+        .prob-transition {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        @keyframes pulse-scale {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.06); }
+        }
+        .prob-pulse {
+            animation: pulse-scale 0.4s ease-in-out;
+        }
+        .streak-icon-enter {
+            animation: fadeSlideIn 0.3s ease-out forwards;
+        }
+        @keyframes fadeSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-8px) scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
     </style>
 </head>
@@ -151,6 +178,10 @@
 <option value="7">+7 ➔ +8</option>
 <option value="8">+8 ➔ +9</option>
 <option value="9">+9 ➔ +10</option>
+<option value="10">+10 ➔ +11</option>
+<option value="11">+11 ➔ +12</option>
+<option value="12">+12 ➔ +13</option>
+<option value="13">+13 ➔ +14</option>
 </select>
 <span class="material-symbols-outlined absolute right-sm top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
 </div>
@@ -164,8 +195,23 @@
 <option selected="" value="3">+3 ➔ +4</option>
 <option value="4">+4 ➔ +5</option>
 <option value="5">+5 ➔ +6</option>
+<option value="6">+6 ➔ +7</option>
+<option value="7">+7 ➔ +8</option>
+<option value="8">+8 ➔ +9</option>
+<option value="9">+9 ➔ +10</option>
+<option value="10">+10 ➔ +11</option>
+<option value="11">+11 ➔ +12</option>
+<option value="12">+12 ➔ +13</option>
+<option value="13">+13 ➔ +14</option>
 </select>
 <span class="material-symbols-outlined absolute right-sm top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
+</div>
+</div>
+<div class="flex-1 flex flex-col gap-sm">
+<label class="font-label-caps text-label-caps text-on-surface-variant">Hệ số biến động (F)</label>
+<div class="relative flex items-center gap-sm bg-surface-container-highest border-b border-outline-variant p-sm rounded-t-lg min-h-[58px]">
+<input class="flex-grow accent-secondary-fixed-dim cursor-pointer h-2 bg-gray-700 rounded-lg appearance-none" id="fFactor" max="0.8" min="0.5" step="0.01" type="range" value="0.65"/>
+<span class="font-headline-md text-headline-md text-secondary-fixed-dim min-w-[50px] text-right" id="fFactorDisplay">0.65</span>
 </div>
 </div>
 </section>
@@ -198,12 +244,12 @@
 </div>
 <div class="flex flex-col items-center gap-sm z-10 my-sm">
 <span class="font-label-caps text-label-caps text-secondary-fixed tracking-widest uppercase">Tỷ lệ ước tính</span>
-<div class="font-display-lg-mobile text-display-lg-mobile md:font-display-lg md:text-display-lg text-secondary-fixed-dim glow-text-green" id="estRateDisplay">
+<div class="font-display-lg-mobile text-display-lg-mobile md:font-display-lg md:text-display-lg text-secondary-fixed-dim glow-text-green prob-transition" id="estRateDisplay">
                     0.00%
                 </div>
 </div>
-<div class="z-10 bg-surface-container-highest border border-secondary-fixed-dim/30 rounded-lg px-lg py-sm flex items-center gap-sm mt-sm" id="recommendationBox">
-<span class="material-symbols-outlined text-secondary-fixed-dim animate-pulse" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<div class="z-10 rounded-lg px-lg py-sm flex items-center gap-sm mt-sm transition-all duration-300" id="recommendationBox">
+<span class="material-symbols-outlined text-secondary-fixed-dim" id="recommendationIcon" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
 <span class="font-headline-md text-headline-md text-on-surface" id="recommendationText">Khuyên dùng: ĐẬP NGAY!</span>
 </div>
 </section>
@@ -219,20 +265,24 @@
 </div>
 </footer>
 <script>
-        const MOCK_BASE_RATES = {
-            1: 0.95, 2: 0.81, 3: 0.64, 4: 0.50, 5: 0.25, 
-            6: 0.15, 7: 0.07, 8: 0.04, 9: 0.02
+        const BASE_RATES = {
+            1: 1.00, 2: 0.81, 3: 0.64, 4: 0.50, 5: 0.26,
+            6: 0.15, 7: 0.07, 8: 0.04, 9: 0.03, 10: 0.02,
+            11: 0.01, 12: 0.007, 13: 0.005
         };
 
         const state = {
             mainLevel: 5,
             fodderLevel: 3,
-            streak: [] 
+            fFactor: 0.65,
+            streak: []
         };
 
         const DOM = {
             mainSelect: document.getElementById('mainLevel'),
             fodderSelect: document.getElementById('fodderLevel'),
+            fSlider: document.getElementById('fFactor'),
+            fDisplay: document.getElementById('fFactorDisplay'),
             streakContainer: document.getElementById('streakContainer'),
             btnFail: document.getElementById('btnFail'),
             btnSuccess: document.getElementById('btnSuccess'),
@@ -240,6 +290,7 @@
             baseDisplay: document.getElementById('baseRateDisplay'),
             estDisplay: document.getElementById('estRateDisplay'),
             recBox: document.getElementById('recommendationBox'),
+            recIcon: document.getElementById('recommendationIcon'),
             recText: document.getElementById('recommendationText')
         };
 
@@ -247,11 +298,14 @@
             const saved = localStorage.getItem('fco_calc_state');
             if (saved) {
                 const parsed = JSON.parse(saved);
-                state.mainLevel = parsed.mainLevel || 5;
-                state.fodderLevel = parsed.fodderLevel || 3;
+                state.mainLevel = parsed.mainLevel !== undefined ? parsed.mainLevel : 5;
+                state.fodderLevel = parsed.fodderLevel !== undefined ? parsed.fodderLevel : 3;
+                state.fFactor = parsed.fFactor !== undefined ? parsed.fFactor : 0.65;
                 state.streak = parsed.streak || [];
                 DOM.mainSelect.value = state.mainLevel;
                 DOM.fodderSelect.value = state.fodderLevel;
+                DOM.fSlider.value = state.fFactor;
+                DOM.fDisplay.textContent = state.fFactor.toFixed(2);
             }
         }
 
@@ -268,7 +322,7 @@
 
             state.streak.forEach(isSuccess => {
                 const icon = document.createElement('span');
-                icon.className = 'material-symbols-outlined flex items-center justify-center w-[32px] h-[32px] rounded-full border border-outline-variant bg-surface-container-highest';
+                icon.className = 'material-symbols-outlined flex items-center justify-center w-[32px] h-[32px] rounded-full border border-outline-variant bg-surface-container-highest streak-icon-enter';
                 icon.style.fontVariationSettings = "'FILL' 1";
                 if (isSuccess) {
                     icon.textContent = 'check_circle';
@@ -282,9 +336,9 @@
         }
 
         function calculateProbability() {
-            const P_main = MOCK_BASE_RATES[state.mainLevel] || 0.1;
-            const P_fodder = MOCK_BASE_RATES[state.fodderLevel] || 0.5;
-            
+            const P_main = BASE_RATES[state.mainLevel] || 0.005;
+            const P_fodder = BASE_RATES[state.fodderLevel] || 0.5;
+
             let k = 0;
             for (let i = state.streak.length - 1; i >= 0; i--) {
                 if (!state.streak[i]) k++;
@@ -293,24 +347,47 @@
 
             let P_est = P_main;
             if (k > 0) {
-                P_est = P_main + ((1 - P_main) * (1 - Math.pow(P_fodder, k)) * 0.65);
+                P_est = P_main + ((1 - P_main) * (1 - Math.pow(P_fodder, k)) * state.fFactor);
             }
-            
+
             P_est = Math.min(P_est, 1.0);
 
             DOM.baseDisplay.textContent = (P_main * 100).toFixed(2) + '%';
             DOM.estDisplay.textContent = (P_est * 100).toFixed(2) + '%';
 
-            if (P_est > P_main * 1.5 || P_est > 0.6) {
-                DOM.recText.textContent = 'Khuyên dùng: ĐẬP NGAY!';
-                DOM.recBox.className = 'z-10 bg-secondary-fixed-dim/10 border border-secondary-fixed-dim/50 rounded-lg px-lg py-sm flex items-center gap-sm mt-sm transition-colors';
+            // Trigger pulse animation
+            DOM.estDisplay.classList.remove('prob-pulse');
+            void DOM.estDisplay.offsetWidth; // force reflow
+            DOM.estDisplay.classList.add('prob-pulse');
+
+            // Threshold classification:
+            // >= 70%: DAP NGAY
+            // 40% - 69.99%: CAN NHAC
+            // < 40%: MOI TIEP
+            if (P_est >= 0.70) {
+                DOM.recText.textContent = 'Khuyên dùng: ĐẬP NGAY! KHUNG GIỜ VÀNG!';
+                DOM.recIcon.textContent = 'local_fire_department';
+                DOM.recIcon.className = 'material-symbols-outlined text-secondary-fixed-dim animate-pulse';
+                DOM.recBox.className = 'z-10 bg-secondary-fixed-dim/10 border border-secondary-fixed-dim/50 rounded-lg px-lg py-sm flex items-center gap-sm mt-sm transition-all duration-300';
+
                 DOM.estDisplay.classList.add('glow-text-green');
-                DOM.estDisplay.classList.remove('text-on-surface');
+                DOM.estDisplay.classList.remove('glow-text-amber', 'text-on-surface');
+            } else if (P_est >= 0.40) {
+                DOM.recText.textContent = 'Khuyên dùng: CÂN NHẮC! Có thể thử nghiệm';
+                DOM.recIcon.textContent = 'warning';
+                DOM.recIcon.className = 'material-symbols-outlined text-amber-500';
+                DOM.recBox.className = 'z-10 bg-amber-500/10 border border-amber-500/50 rounded-lg px-lg py-sm flex items-center gap-sm mt-sm transition-all duration-300';
+
+                DOM.estDisplay.classList.add('glow-text-amber');
+                DOM.estDisplay.classList.remove('glow-text-green', 'text-on-surface');
             } else {
-                DOM.recText.textContent = 'Khuyên dùng: TÍCH THÊM MỒI';
-                DOM.recBox.className = 'z-10 bg-surface-container-highest border border-outline-variant rounded-lg px-lg py-sm flex items-center gap-sm mt-sm transition-colors';
-                DOM.estDisplay.classList.remove('glow-text-green');
+                DOM.recText.textContent = 'Khuyên dùng: MỒI TIẾP ĐI! Chưa đủ tỉ lệ';
+                DOM.recIcon.textContent = 'hourglass_top';
+                DOM.recIcon.className = 'material-symbols-outlined text-on-surface-variant';
+                DOM.recBox.className = 'z-10 bg-surface-container-highest border border-outline-variant rounded-lg px-lg py-sm flex items-center gap-sm mt-sm transition-all duration-300';
+
                 DOM.estDisplay.classList.add('text-on-surface');
+                DOM.estDisplay.classList.remove('glow-text-green', 'glow-text-amber');
             }
         }
 
@@ -322,19 +399,25 @@
 
         DOM.mainSelect.addEventListener('change', (e) => { state.mainLevel = parseInt(e.target.value); update(); });
         DOM.fodderSelect.addEventListener('change', (e) => { state.fodderLevel = parseInt(e.target.value); update(); });
-        
-        DOM.btnFail.addEventListener('click', () => { 
-            if(state.streak.length > 9) state.streak.shift();
-            state.streak.push(false); 
-            update(); 
+
+        DOM.fSlider.addEventListener('input', (e) => {
+            state.fFactor = parseFloat(e.target.value);
+            DOM.fDisplay.textContent = state.fFactor.toFixed(2);
+            update();
         });
-        
-        DOM.btnSuccess.addEventListener('click', () => { 
-            if(state.streak.length > 9) state.streak.shift();
-            state.streak.push(true); 
-            update(); 
+
+        DOM.btnFail.addEventListener('click', () => {
+            if(state.streak.length > 29) state.streak.shift();
+            state.streak.push(false);
+            update();
         });
-        
+
+        DOM.btnSuccess.addEventListener('click', () => {
+            if(state.streak.length > 29) state.streak.shift();
+            state.streak.push(true);
+            update();
+        });
+
         DOM.btnReset.addEventListener('click', () => { state.streak = []; update(); });
 
         loadState();
