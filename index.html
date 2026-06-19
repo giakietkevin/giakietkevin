@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FC PROBABILITY HUB</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface": "#0d1229",
+                        "on-primary-container": "#79788d",
+                        "on-primary-fixed": "#1a1a2b",
+                        "on-secondary-fixed-variant": "#005228",
+                        "surface-container-low": "#151a32",
+                        "surface-dim": "#0d1229",
+                        "error-container": "#93000a",
+                        "tertiary-container": "#230001",
+                        "surface-container-lowest": "#070c24",
+                        "primary": "#c6c4db",
+                        "on-primary": "#2f2f40",
+                        "secondary-container": "#34ff8d",
+                        "tertiary-fixed": "#ffdad7",
+                        "primary-container": "#0a0a1a",
+                        "tertiary-fixed-dim": "#ffb3ae",
+                        "on-error": "#690005",
+                        "inverse-surface": "#dde1ff",
+                        "outline-variant": "#47464c",
+                        "error": "#ffb4ab",
+                        "secondary-fixed": "#60ff99",
+                        "on-tertiary": "#68000b",
+                        "on-error-container": "#ffdad6",
+                        "outline": "#929097",
+                        "on-tertiary-container": "#e3383c",
+                        "surface-tint": "#c6c4db",
+                        "primary-fixed": "#e3e0f8",
+                        "on-tertiary-fixed": "#410004",
+                        "on-secondary-container": "#007239",
+                        "surface-container-high": "#242841",
+                        "secondary": "#f5fff3",
+                        "tertiary": "#ffb3ae",
+                        "primary-fixed-dim": "#c6c4db",
+                        "secondary-fixed-dim": "#00e479",
+                        "on-secondary-fixed": "#00210c",
+                        "on-background": "#dde1ff",
+                        "background": "#0d1229",
+                        "surface-container-highest": "#2e334d",
+                        "surface-container": "#191e36",
+                        "surface-bright": "#333851",
+                        "on-tertiary-fixed-variant": "#930014",
+                        "surface-variant": "#2e334d",
+                        "on-surface-variant": "#c8c5cd",
+                        "on-surface": "#dde1ff",
+                        "inverse-primary": "#5d5c70",
+                        "on-secondary": "#003919",
+                        "inverse-on-surface": "#2a2f48",
+                        "on-primary-fixed-variant": "#464558"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "20px",
+                        "md": "24px",
+                        "sm": "12px",
+                        "xs": "4px",
+                        "lg": "40px",
+                        "base": "8px",
+                        "container-max": "1200px",
+                        "xl": "64px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Space Grotesk"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Space Grotesk"],
+                        "label-caps": ["JetBrains Mono"],
+                        "body-lg": ["Inter"],
+                        "display-lg-mobile": ["Space Grotesk"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .glass-card {
+            background-color: theme('colors.surface-container-low');
+            backdrop-filter: blur(16px);
+            border: 1px solid theme('colors.outline-variant');
+        }
+        .neon-green-glow {
+            box-shadow: 0 0 15px theme('colors.secondary-fixed-dim');
+        }
+        .neon-red-glow {
+            box-shadow: 0 0 15px theme('colors.error');
+        }
+        .glow-text-green {
+            text-shadow: 0 0 10px theme('colors.secondary-fixed-dim');
+        }
+    </style>
+</head>
+<body class="bg-background relative">
+<div class="fixed inset-0 z-[-1] opacity-20 pointer-events-none" data-alt="A dark, high-tech abstract background featuring geometric mesh grids and subtle glowing neon green lines intersecting in a deep navy digital void. The mood is analytical, futuristic, and competitive, reminiscent of a high-end sports management interface." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAtP7Uss8-eaRx_xzGUBbFC4fNh4yIgUsrvxMCtum1cNL1DPAbM8huWBWRIJPURR1NgqEyxgxp318WzKvw1RMKtASASXLlWPOmlshzY9sGdYMem8BYXCalZI4hdi566dIlqRLqdeqDOwpW7dn20mp7ok0eJuM--tqY7c5h0Yi3PyYudnz_7c0Ynue7jTCe8kqT07_y8NkUk7Pu0Zdse24LMogb3bgA4lXRvVjxX46_vL_HXy7TWBOQGAf2mGG9VLhAXr3FxBvoYfQ-a')"></div>
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-gutter py-sm max-w-container-max mx-auto bg-surface/60 backdrop-blur-md border-b border-white/20 shadow-[0_4px_30px_rgba(0,0,0,0.1)] transition-all duration-300 ease-in-out">
+<div class="font-display-lg-mobile text-display-lg-mobile md:font-display-lg md:text-display-lg text-secondary-fixed-dim drop-shadow-[0_0_8px_rgba(0,228,121,0.8)]">FC PROBABILITY HUB</div>
+<div class="hidden md:flex gap-md font-headline-md text-headline-md">
+<a class="text-secondary-fixed-dim border-b-2 border-secondary-fixed-dim pb-1" href="#">Dashboard</a>
+<a class="text-on-surface-variant hover:text-secondary-fixed hover:drop-shadow-[0_0_5px_rgba(0,228,121,0.5)] transition-all duration-300" href="#">History</a>
+<a class="text-on-surface-variant hover:text-secondary-fixed hover:drop-shadow-[0_0_5px_rgba(0,228,121,0.5)] transition-all duration-300" href="#">Guide</a>
+</div>
+<div class="flex gap-md items-center">
+<span class="material-symbols-outlined text-secondary-fixed-dim cursor-pointer hover:text-secondary-fixed transition-colors">notifications</span>
+<span class="material-symbols-outlined text-secondary-fixed-dim cursor-pointer hover:text-secondary-fixed transition-colors">settings</span>
+</div>
+</nav>
+<main class="flex-grow w-full max-w-container-max mx-auto px-gutter pt-[100px] pb-lg flex flex-col gap-lg">
+<section class="glass-card rounded-xl p-md flex flex-col md:flex-row gap-lg">
+<div class="flex-1 flex flex-col gap-sm">
+<label class="font-label-caps text-label-caps text-on-surface-variant">Thẻ Chính (Mục Tiêu)</label>
+<div class="relative">
+<select class="w-full bg-surface-container-highest border-b border-outline-variant text-on-surface font-headline-md text-headline-md p-sm focus:border-secondary-fixed-dim focus:ring-0 transition-colors appearance-none cursor-pointer rounded-t-lg" id="mainLevel">
+<option value="1">+1 ➔ +2</option>
+<option value="2">+2 ➔ +3</option>
+<option value="3">+3 ➔ +4</option>
+<option value="4">+4 ➔ +5</option>
+<option selected="" value="5">+5 ➔ +6</option>
+<option value="6">+6 ➔ +7</option>
+<option value="7">+7 ➔ +8</option>
+<option value="8">+8 ➔ +9</option>
+<option value="9">+9 ➔ +10</option>
+</select>
+<span class="material-symbols-outlined absolute right-sm top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
+</div>
+</div>
+<div class="flex-1 flex flex-col gap-sm">
+<label class="font-label-caps text-label-caps text-on-surface-variant">Thẻ Mồi (Vật Tế)</label>
+<div class="relative">
+<select class="w-full bg-surface-container-highest border-b border-outline-variant text-on-surface font-headline-md text-headline-md p-sm focus:border-error focus:ring-0 transition-colors appearance-none cursor-pointer rounded-t-lg" id="fodderLevel">
+<option value="1">+1 ➔ +2</option>
+<option value="2">+2 ➔ +3</option>
+<option selected="" value="3">+3 ➔ +4</option>
+<option value="4">+4 ➔ +5</option>
+<option value="5">+5 ➔ +6</option>
+</select>
+<span class="material-symbols-outlined absolute right-sm top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
+</div>
+</div>
+</section>
+<section class="glass-card rounded-xl p-md flex flex-col gap-md">
+<div class="flex justify-between items-center border-b border-outline-variant pb-sm">
+<h2 class="font-headline-md text-headline-md text-on-surface">Dây mồi hiện tại</h2>
+<button class="flex items-center gap-xs text-on-surface-variant hover:text-inverse-surface font-label-caps text-label-caps transition-colors" id="resetBtn">
+<span class="material-symbols-outlined" style="font-size: 16px;">refresh</span>
+                    RESET
+                </button>
+</div>
+<div class="flex flex-wrap gap-sm min-h-[48px] items-center" id="streakContainer">
+</div>
+<div class="flex gap-md mt-sm">
+<button class="flex-1 bg-surface-container-highest border border-error text-error font-headline-md text-headline-md py-sm rounded-lg hover:bg-error hover:text-on-error hover:neon-red-glow transition-all flex justify-center items-center gap-sm" id="btnFail">
+                    ĐẬP MỒI XỊT
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">cancel</span>
+</button>
+<button class="flex-1 bg-secondary-fixed-dim text-on-secondary-fixed font-headline-md text-headline-md py-sm rounded-lg hover:brightness-110 hover:neon-green-glow transition-all flex justify-center items-center gap-sm" id="btnSuccess">
+                    ĐẬP MỒI LÊN
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</button>
+</div>
+</section>
+<section class="glass-card rounded-xl p-lg flex flex-col items-center justify-center text-center gap-md relative overflow-hidden">
+<div class="absolute inset-0 bg-secondary-fixed-dim opacity-5 blur-[100px] pointer-events-none"></div>
+<div class="flex flex-col items-center gap-xs z-10">
+<span class="font-body-md text-body-md text-on-surface-variant">Tỷ lệ gốc (Nexon)</span>
+<span class="font-headline-md text-headline-md text-surface-tint" id="baseRateDisplay">0.00%</span>
+</div>
+<div class="flex flex-col items-center gap-sm z-10 my-sm">
+<span class="font-label-caps text-label-caps text-secondary-fixed tracking-widest uppercase">Tỷ lệ ước tính</span>
+<div class="font-display-lg-mobile text-display-lg-mobile md:font-display-lg md:text-display-lg text-secondary-fixed-dim glow-text-green" id="estRateDisplay">
+                    0.00%
+                </div>
+</div>
+<div class="z-10 bg-surface-container-highest border border-secondary-fixed-dim/30 rounded-lg px-lg py-sm flex items-center gap-sm mt-sm" id="recommendationBox">
+<span class="material-symbols-outlined text-secondary-fixed-dim animate-pulse" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<span class="font-headline-md text-headline-md text-on-surface" id="recommendationText">Khuyên dùng: ĐẬP NGAY!</span>
+</div>
+</section>
+</main>
+<footer class="w-full py-md px-gutter flex flex-col md:flex-row justify-between items-center mt-xl bg-surface-container-lowest border-t border-white/10">
+<div class="font-label-caps text-label-caps text-on-primary-container">
+            © 2024 FC TACTICAL INTERFACE. FOR COMPETITIVE USE ONLY.
+        </div>
+<div class="flex gap-md mt-sm md:mt-0">
+<a class="font-label-caps text-label-caps text-on-primary-container hover:text-secondary-fixed transition-colors opacity-80 hover:opacity-100" href="#">Privacy</a>
+<a class="font-label-caps text-label-caps text-on-primary-container hover:text-secondary-fixed transition-colors opacity-80 hover:opacity-100" href="#">Terms</a>
+<a class="font-label-caps text-label-caps text-on-primary-container hover:text-secondary-fixed transition-colors opacity-80 hover:opacity-100" href="#">API</a>
+</div>
+</footer>
+<script>
+        const MOCK_BASE_RATES = {
+            1: 0.95, 2: 0.81, 3: 0.64, 4: 0.50, 5: 0.25, 
+            6: 0.15, 7: 0.07, 8: 0.04, 9: 0.02
+        };
+
+        const state = {
+            mainLevel: 5,
+            fodderLevel: 3,
+            streak: [] 
+        };
+
+        const DOM = {
+            mainSelect: document.getElementById('mainLevel'),
+            fodderSelect: document.getElementById('fodderLevel'),
+            streakContainer: document.getElementById('streakContainer'),
+            btnFail: document.getElementById('btnFail'),
+            btnSuccess: document.getElementById('btnSuccess'),
+            btnReset: document.getElementById('resetBtn'),
+            baseDisplay: document.getElementById('baseRateDisplay'),
+            estDisplay: document.getElementById('estRateDisplay'),
+            recBox: document.getElementById('recommendationBox'),
+            recText: document.getElementById('recommendationText')
+        };
+
+        function loadState() {
+            const saved = localStorage.getItem('fco_calc_state');
+            if (saved) {
+                const parsed = JSON.parse(saved);
+                state.mainLevel = parsed.mainLevel || 5;
+                state.fodderLevel = parsed.fodderLevel || 3;
+                state.streak = parsed.streak || [];
+                DOM.mainSelect.value = state.mainLevel;
+                DOM.fodderSelect.value = state.fodderLevel;
+            }
+        }
+
+        function saveState() {
+            localStorage.setItem('fco_calc_state', JSON.stringify(state));
+        }
+
+        function renderStreak() {
+            DOM.streakContainer.innerHTML = '';
+            if (state.streak.length === 0) {
+                DOM.streakContainer.innerHTML = '<span class="text-on-surface-variant font-body-md text-body-md italic opacity-50">Chưa có dữ liệu mồi...</span>';
+                return;
+            }
+
+            state.streak.forEach(isSuccess => {
+                const icon = document.createElement('span');
+                icon.className = 'material-symbols-outlined flex items-center justify-center w-[32px] h-[32px] rounded-full border border-outline-variant bg-surface-container-highest';
+                icon.style.fontVariationSettings = "'FILL' 1";
+                if (isSuccess) {
+                    icon.textContent = 'check_circle';
+                    icon.classList.add('text-secondary-fixed-dim');
+                } else {
+                    icon.textContent = 'cancel';
+                    icon.classList.add('text-error');
+                }
+                DOM.streakContainer.appendChild(icon);
+            });
+        }
+
+        function calculateProbability() {
+            const P_main = MOCK_BASE_RATES[state.mainLevel] || 0.1;
+            const P_fodder = MOCK_BASE_RATES[state.fodderLevel] || 0.5;
+            
+            let k = 0;
+            for (let i = state.streak.length - 1; i >= 0; i--) {
+                if (!state.streak[i]) k++;
+                else break;
+            }
+
+            let P_est = P_main;
+            if (k > 0) {
+                P_est = P_main + ((1 - P_main) * (1 - Math.pow(P_fodder, k)) * 0.65);
+            }
+            
+            P_est = Math.min(P_est, 1.0);
+
+            DOM.baseDisplay.textContent = (P_main * 100).toFixed(2) + '%';
+            DOM.estDisplay.textContent = (P_est * 100).toFixed(2) + '%';
+
+            if (P_est > P_main * 1.5 || P_est > 0.6) {
+                DOM.recText.textContent = 'Khuyên dùng: ĐẬP NGAY!';
+                DOM.recBox.className = 'z-10 bg-secondary-fixed-dim/10 border border-secondary-fixed-dim/50 rounded-lg px-lg py-sm flex items-center gap-sm mt-sm transition-colors';
+                DOM.estDisplay.classList.add('glow-text-green');
+                DOM.estDisplay.classList.remove('text-on-surface');
+            } else {
+                DOM.recText.textContent = 'Khuyên dùng: TÍCH THÊM MỒI';
+                DOM.recBox.className = 'z-10 bg-surface-container-highest border border-outline-variant rounded-lg px-lg py-sm flex items-center gap-sm mt-sm transition-colors';
+                DOM.estDisplay.classList.remove('glow-text-green');
+                DOM.estDisplay.classList.add('text-on-surface');
+            }
+        }
+
+        function update() {
+            renderStreak();
+            calculateProbability();
+            saveState();
+        }
+
+        DOM.mainSelect.addEventListener('change', (e) => { state.mainLevel = parseInt(e.target.value); update(); });
+        DOM.fodderSelect.addEventListener('change', (e) => { state.fodderLevel = parseInt(e.target.value); update(); });
+        
+        DOM.btnFail.addEventListener('click', () => { 
+            if(state.streak.length > 9) state.streak.shift();
+            state.streak.push(false); 
+            update(); 
+        });
+        
+        DOM.btnSuccess.addEventListener('click', () => { 
+            if(state.streak.length > 9) state.streak.shift();
+            state.streak.push(true); 
+            update(); 
+        });
+        
+        DOM.btnReset.addEventListener('click', () => { state.streak = []; update(); });
+
+        loadState();
+        update();
+    </script>
+</body></html>
