@@ -347,6 +347,16 @@ Thêm phôi
                     <span class="material-symbols-outlined">restart_alt</span>
 </button>
 </div>
+<!-- Chu kỳ mồi thành công tham khảo -->
+<div class="mt-md border-t border-outline-variant/30 pt-sm flex flex-col gap-sm">
+<span class="font-label-caps text-label-caps text-on-surface-variant flex items-center gap-xs">
+<span class="material-symbols-outlined text-secondary-fixed-dim" style="font-size: 16px;">history</span>
+Chu kỳ mồi thành công gần đây (Tối đa 5 phôi trước khi lên)
+</span>
+<div class="flex flex-col gap-xs" id="referencePatternsContainer">
+<!-- Sẽ được hiển thị bằng Javascript -->
+</div>
+</div>
 </section>
 <section class="glass-card rounded-xl p-lg flex flex-col items-center justify-center text-center gap-md relative overflow-hidden">
 <div class="absolute inset-0 bg-secondary-fixed-dim opacity-5 blur-[100px] pointer-events-none"></div>
@@ -430,7 +440,9 @@ Thêm phôi
             gaugeMissingCount: document.getElementById('gaugeMissingCount'),
             gaugeEstRate: document.getElementById('gaugeEstRate'),
             gaugeVerdict: document.getElementById('gaugeVerdict'),
-            fodderBreakdown: document.getElementById('fodderBreakdown')
+            fodderBreakdown: document.getElementById('fodderBreakdown'),
+            // Reference Patterns DOM Element
+            referencePatternsContainer: document.getElementById('referencePatternsContainer')
         };
 
         let chartInstance = null;
@@ -683,6 +695,83 @@ Thêm phôi
             });
         }
 
+        // Phân tích dây mồi từ lịch sử để đưa ra các chu kỳ thành công tham khảo
+        function getReferencePatterns() {
+            const patterns = [];
+            let currentFailSequence = [];
+
+            state.streak.forEach(item => {
+                const success = (typeof item === 'object') ? item.success : item;
+                const level = (typeof item === 'object') ? item.level : state.fodderLevel;
+
+                if (success) {
+                    if (currentFailSequence.length > 0) {
+                        const lastFails = currentFailSequence.slice(-5);
+                        patterns.push({
+                            fails: lastFails,
+                            successLevel: level
+                        });
+                    }
+                    currentFailSequence = [];
+                } else {
+                    const dropTo = (typeof item === 'object') ? item.dropTo : (level - 1);
+                    currentFailSequence.push({
+                        level: level,
+                        dropTo: dropTo
+                    });
+                }
+            });
+
+            return patterns;
+        }
+
+        function renderReferencePatterns() {
+            const container = DOM.referencePatternsContainer;
+            if (!container) return;
+
+            container.innerHTML = '';
+            const patterns = getReferencePatterns();
+
+            if (patterns.length === 0) {
+                container.innerHTML = `
+                    <div class="text-on-surface-variant font-body-md text-xs italic opacity-60 bg-surface-container/30 border border-outline-variant/20 rounded-lg p-sm">
+                        Chưa ghi nhận chu kỳ đập lên thành công nào trong dây mồi hiện tại. Hãy bấm "ĐẬP MỒI LÊN" sau khi mồi xịt để hệ thống phân tích chu kỳ.
+                    </div>
+                `;
+                return;
+            }
+
+            // Hiển thị tối đa 5 chu kỳ thành công gần nhất
+            const recentPatterns = patterns.slice(-5);
+
+            recentPatterns.forEach((p, pIdx) => {
+                const row = document.createElement('div');
+                row.className = 'flex flex-wrap items-center gap-xs bg-surface-container-highest/60 rounded-lg p-xs border border-outline-variant/30 hover:border-secondary-fixed-dim/20 transition-all';
+
+                let html = `<span class="font-label-caps text-[10px] text-on-surface-variant mr-xs">Chu kỳ #${pIdx + 1}:</span>`;
+
+                p.fails.forEach((f, fIdx) => {
+                    html += `
+                        <span class="inline-flex items-center gap-xs px-xs py-0.5 rounded border border-error/20 bg-error/5 text-[11px] text-error font-label-caps">
+                            ❌ +${f.level}
+                        </span>
+                    `;
+                    if (fIdx < p.fails.length - 1 || true) {
+                        html += `<span class="text-on-surface-variant text-[10px] opacity-70">➔</span>`;
+                    }
+                });
+
+                html += `
+                    <span class="inline-flex items-center gap-xs px-sm py-0.5 rounded border border-secondary-fixed-dim/30 bg-secondary-fixed-dim/10 text-[11px] text-secondary-fixed-dim font-bold font-label-caps">
+                        ✅ LÊN +${p.successLevel}
+                    </span>
+                `;
+
+                row.innerHTML = html;
+                container.appendChild(row);
+            });
+        }
+
         function calculateProbability() {
             const P_main = BASE_RATES[state.mainLevel] || 0.005;
             const P_fodder = BASE_RATES[state.fodderLevel] || 0.5;
@@ -770,6 +859,7 @@ Thêm phôi
 
         function update() {
             renderStreak();
+            renderReferencePatterns();
             calculateProbability();
             saveState();
         }
@@ -815,12 +905,6 @@ Thêm phôi
         // GAUGE CALCULATOR (Tính Số Vạch Đập Thẻ)
         // ==========================================
 
-        // Bảng bonus OVR theo cấp nâng cấp cầu thủ
-        const UPGRADE_OVR_BONUS = {
-            1: 0, 2: 1, 3: 2, 4: 3, 5: 5,
-            6: 7, 7: 10, 8: 14, 9: 19, 10: 25
-        };
-
         // Tính số vạch từ chênh lệch OVR (cơ chế game FC Online)
         function getVachFromDiff(diff) {
             if (diff >= 5) return 5.0;
@@ -848,29 +932,20 @@ Thêm phôi
                 return;
             }
 
-            state.gaugeFodders.forEach((fodder, index) => {
+            state.gaugeFodders.forEach((fodderOVR, index) => {
                 const row = document.createElement('div');
                 row.className = 'flex items-center gap-xs bg-surface-container-highest rounded-lg p-xs border border-outline-variant/50 transition-all duration-200 hover:border-secondary-fixed-dim/30';
 
-                const playerCurrentOVR = state.gaugeBaseOVR + (UPGRADE_OVR_BONUS[state.gaugeUpgradeLevel] || 0);
-                const fodderOVR = fodder.ovr + (UPGRADE_OVR_BONUS[fodder.level] || 0);
-                const diff = fodderOVR - playerCurrentOVR;
+                const diff = fodderOVR - state.gaugeBaseOVR;
                 const vach = getVachFromDiff(diff);
 
                 row.innerHTML = `
                     <span class="font-label-caps text-label-caps text-on-surface-variant min-w-[32px] text-center">#${index + 1}</span>
-                    <div class="flex-1 flex flex-col md:flex-row gap-xs">
-                        <div class="flex items-center gap-xs flex-1">
-                            <label class="text-xs text-on-surface-variant whitespace-nowrap">OVR:</label>
-                            <input type="number" class="w-full bg-surface-container border-b border-outline-variant text-on-surface font-headline-md text-sm p-xs focus:border-secondary-fixed-dim focus:ring-0 transition-colors rounded text-center"
-                                   min="50" max="130" value="${fodder.ovr}" data-fodder-idx="${index}" data-fodder-field="ovr" />
-                        </div>
-                        <div class="flex items-center gap-xs flex-1">
-                            <label class="text-xs text-on-surface-variant whitespace-nowrap">Mức:</label>
-                            <select class="w-full bg-surface-container border-b border-outline-variant text-on-surface font-headline-md text-sm p-xs focus:border-secondary-fixed-dim focus:ring-0 transition-colors rounded cursor-pointer"
-                                    data-fodder-idx="${index}" data-fodder-field="level">
-                                ${[1,2,3,4,5,6,7,8,9,10].map(l => `<option value="${l}" ${l === fodder.level ? 'selected' : ''}>+${l}</option>`).join('')}
-                            </select>
+                    <div class="flex-grow flex items-center gap-sm">
+                        <div class="flex items-center gap-xs flex-grow">
+                            <label class="text-xs text-on-surface-variant whitespace-nowrap">Chỉ số OVR phôi:</label>
+                            <input type="number" class="w-full max-w-[120px] bg-surface-container border-b border-outline-variant text-on-surface font-headline-md text-sm p-xs focus:border-secondary-fixed-dim focus:ring-0 transition-colors rounded text-center"
+                                   min="50" max="130" value="${fodderOVR}" data-fodder-idx="${index}" />
                         </div>
                     </div>
                     <div class="flex items-center gap-xs min-w-[90px] justify-end">
@@ -885,29 +960,20 @@ Thêm phôi
             });
 
             // Attach event listeners for inputs
-            container.querySelectorAll('[data-fodder-field="ovr"]').forEach(input => {
+            container.querySelectorAll('input[data-fodder-idx]').forEach(input => {
                 input.addEventListener('change', (e) => {
                     const idx = parseInt(e.target.dataset.fodderIdx);
-                    state.gaugeFodders[idx].ovr = parseInt(e.target.value) || 50;
-                    calculateGauge();
+                    state.gaugeFodders[idx] = parseInt(e.target.value) || 50;
+                    calculateGauge(false); // Don't re-render fodder list on input change to avoid losing focus
                     saveGaugeState();
                 });
                 input.addEventListener('input', (e) => {
                     const idx = parseInt(e.target.dataset.fodderIdx);
                     const val = parseInt(e.target.value);
                     if (!isNaN(val)) {
-                        state.gaugeFodders[idx].ovr = val;
-                        calculateGauge();
+                        state.gaugeFodders[idx] = val;
+                        calculateGauge(false); // Don't re-render list, just update totals
                     }
-                });
-            });
-
-            container.querySelectorAll('[data-fodder-field="level"]').forEach(select => {
-                select.addEventListener('change', (e) => {
-                    const idx = parseInt(e.target.dataset.fodderIdx);
-                    state.gaugeFodders[idx].level = parseInt(e.target.value);
-                    calculateGauge();
-                    saveGaugeState();
                 });
             });
 
@@ -916,7 +982,7 @@ Thêm phôi
                     const idx = parseInt(e.currentTarget.dataset.removeFodder);
                     state.gaugeFodders.splice(idx, 1);
                     renderFodderList();
-                    calculateGauge();
+                    calculateGauge(true);
                     saveGaugeState();
                     updateAddFodderButton();
                 });
@@ -932,23 +998,20 @@ Thêm phôi
         }
 
         // Tính toán và cập nhật thanh vạch
-        function calculateGauge() {
-            const playerCurrentOVR = state.gaugeBaseOVR + (UPGRADE_OVR_BONUS[state.gaugeUpgradeLevel] || 0);
+        function calculateGauge(shouldRenderList = true) {
+            const playerOVR = state.gaugeBaseOVR;
             const maxVach = 5.0;
 
             let totalVach = 0;
             const breakdown = [];
 
-            state.gaugeFodders.forEach((fodder, index) => {
-                const fodderTotalOVR = fodder.ovr + (UPGRADE_OVR_BONUS[fodder.level] || 0);
-                const diff = fodderTotalOVR - playerCurrentOVR;
+            state.gaugeFodders.forEach((fodderOVR, index) => {
+                const diff = fodderOVR - playerOVR;
                 const vach = getVachFromDiff(diff);
                 totalVach += vach;
                 breakdown.push({
                     index: index + 1,
-                    baseOVR: fodder.ovr,
-                    level: fodder.level,
-                    totalOVR: fodderTotalOVR,
+                    fodderOVR: fodderOVR,
                     diff: diff,
                     vach: vach
                 });
@@ -1004,10 +1067,29 @@ Thêm phôi
             }
 
             // Render chi tiết từng phôi
-            renderFodderBreakdown(breakdown, playerCurrentOVR);
+            renderFodderBreakdown(breakdown, playerOVR);
 
-            // Re-render fodder list to update vạch labels inline
-            renderFodderList();
+            // Re-render fodder list only if requested to avoid losing focus
+            if (shouldRenderList) {
+                renderFodderList();
+            } else {
+                // Update just the inline vạch text labels in the list without re-rendering inputs
+                const container = DOM.fodderListContainer;
+                state.gaugeFodders.forEach((fodderOVR, index) => {
+                    const diff = fodderOVR - playerOVR;
+                    const vach = getVachFromDiff(diff);
+                    const label = container.querySelector(`span[data-fodder-idx="${index}"]`);
+                    if (label) {
+                        // Find the vạch indicator element in the row
+                        const row = label.closest('div');
+                        const vachSpan = row.querySelector('.font-label-caps.text-label-caps');
+                        if (vachSpan) {
+                            vachSpan.textContent = `${vach.toFixed(2)} vạch`;
+                            vachSpan.className = `font-label-caps text-label-caps ${vach >= 1.0 ? 'text-secondary-fixed-dim' : vach > 0 ? 'text-amber-500' : 'text-error'}`;
+                        }
+                    }
+                });
+            }
         }
 
         // Render bảng chi tiết phân tích vạch từng phôi
@@ -1020,11 +1102,9 @@ Thêm phôi
 
             let html = `
                 <div class="bg-surface-container-highest/50 rounded-lg border border-outline-variant/30 overflow-hidden">
-                    <div class="grid grid-cols-6 gap-xs p-xs text-center font-label-caps text-label-caps text-on-surface-variant border-b border-outline-variant/30">
+                    <div class="grid grid-cols-4 gap-xs p-xs text-center font-label-caps text-label-caps text-on-surface-variant border-b border-outline-variant/30">
                         <span>#</span>
-                        <span>OVR gốc</span>
-                        <span>Mức</span>
-                        <span>OVR tổng</span>
+                        <span>OVR phôi</span>
                         <span>Chênh lệch</span>
                         <span>Vạch</span>
                     </div>
@@ -1035,11 +1115,9 @@ Thêm phôi
                 const vachColor = item.vach >= 1.0 ? 'text-secondary-fixed-dim' : (item.vach > 0 ? 'text-amber-500' : 'text-error');
 
                 html += `
-                    <div class="grid grid-cols-6 gap-xs p-xs text-center text-sm border-b border-outline-variant/10 last:border-0">
+                    <div class="grid grid-cols-4 gap-xs p-xs text-center text-sm border-b border-outline-variant/10 last:border-0">
                         <span class="text-on-surface-variant">${item.index}</span>
-                        <span class="text-on-surface">${item.baseOVR}</span>
-                        <span class="text-on-surface">+${item.level}</span>
-                        <span class="text-on-surface font-semibold">${item.totalOVR}</span>
+                        <span class="text-on-surface font-semibold">${item.fodderOVR}</span>
                         <span class="${diffColor} font-semibold">${item.diff >= 0 ? '+' : ''}${item.diff}</span>
                         <span class="${vachColor} font-bold">${item.vach.toFixed(2)}</span>
                     </div>
@@ -1047,8 +1125,8 @@ Thêm phôi
             });
 
             html += `
-                    <div class="grid grid-cols-6 gap-xs p-xs text-center font-label-caps text-label-caps border-t border-outline-variant/50 bg-surface-container-highest">
-                        <span class="col-span-4 text-right text-on-surface-variant">OVR thẻ chính: ${playerOVR}</span>
+                    <div class="grid grid-cols-4 gap-xs p-xs text-center font-label-caps text-label-caps border-t border-outline-variant/50 bg-surface-container-highest">
+                        <span class="col-span-2 text-right text-on-surface-variant">OVR thẻ chính: ${playerOVR}</span>
                         <span class="text-on-surface-variant">TỔNG</span>
                         <span class="text-secondary-fixed-dim font-bold">${breakdown.reduce((s, i) => s + i.vach, 0).toFixed(2)}</span>
                     </div>
@@ -1073,9 +1151,9 @@ Thêm phôi
             if (saved) {
                 try {
                     const parsed = JSON.parse(saved);
-                    state.gaugeBaseOVR = parsed.gaugeBaseOVR !== undefined ? parsed.gaugeBaseOVR : 85;
+                    state.gaugeBaseOVR = parsed.gaugeBaseOVR !== undefined ? parsed.gaugeBaseOVR : 120;
                     state.gaugeUpgradeLevel = parsed.gaugeUpgradeLevel !== undefined ? parsed.gaugeUpgradeLevel : 5;
-                    state.gaugeFodders = parsed.gaugeFodders || [{ ovr: 85, level: 1 }];
+                    state.gaugeFodders = parsed.gaugeFodders || [120, 120, 120, 120, 120];
                     DOM.gaugeBaseOVRInput.value = state.gaugeBaseOVR;
                     DOM.gaugeUpgradeLevelSelect.value = state.gaugeUpgradeLevel;
                 } catch(e) {
@@ -1089,26 +1167,26 @@ Thêm phôi
             const val = parseInt(e.target.value);
             if (!isNaN(val) && val >= 50 && val <= 130) {
                 state.gaugeBaseOVR = val;
-                calculateGauge();
+                calculateGauge(true);
             }
         });
         DOM.gaugeBaseOVRInput.addEventListener('change', (e) => {
-            state.gaugeBaseOVR = parseInt(e.target.value) || 85;
-            calculateGauge();
+            state.gaugeBaseOVR = parseInt(e.target.value) || 120;
+            calculateGauge(true);
             saveGaugeState();
         });
 
         DOM.gaugeUpgradeLevelSelect.addEventListener('change', (e) => {
             state.gaugeUpgradeLevel = parseInt(e.target.value);
-            calculateGauge();
+            calculateGauge(true);
             saveGaugeState();
         });
 
         DOM.btnAddFodder.addEventListener('click', () => {
             if (state.gaugeFodders.length >= 5) return;
-            state.gaugeFodders.push({ ovr: state.gaugeBaseOVR, level: 1 });
+            state.gaugeFodders.push(state.gaugeBaseOVR);
             renderFodderList();
-            calculateGauge();
+            calculateGauge(true);
             saveGaugeState();
             updateAddFodderButton();
         });
@@ -1118,7 +1196,7 @@ Thêm phôi
             loadGaugeState();
             updateAddFodderButton();
             renderFodderList();
-            calculateGauge();
+            calculateGauge(true);
         }
 
         // Khởi động
