@@ -38,14 +38,23 @@ I enjoy exploring new technologies, building modern applications, and solving ch
 <h2 align="center">GitHub Stats 📊</h2>
 
 <div align="center">
-  <img src="https://github-profile-maker.vercel.app/api/stats?username=giakietkevin&theme=catppuccin_mocha&layout=standard&show_icons=true&hide_border=false&hide_title=false&hide_rank=false&border_radius=12" alt="GitHub Stats" width="49%" height="230" style="margin-right: 12px;" />
-  <img src="https://github-profile-maker.vercel.app/api/top-langs?username=giakietkevin&theme=catppuccin_mocha&layout=compact&hide_border=false&hide_progress=false&langs_count=8&border_radius=12" alt="Top Languages" width="49%" height="230" style="" />
+  <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td width="50%" align="center" valign="top">
+        <img src="https://github-profile-maker.vercel.app/api/stats?username=giakietkevin&theme=catppuccin_mocha&layout=standard&show_icons=true&hide_border=false&hide_title=false&hide_rank=false&border_radius=12" alt="GitHub Stats" style="max-width: 100%; height: auto;" />
+      </td>
+      <td width="50%" align="center" valign="top">
+        <img src="https://github-profile-maker.vercel.app/api/top-langs?username=giakietkevin&theme=catppuccin_mocha&layout=compact&hide_border=false&hide_progress=false&langs_count=8&border_radius=12" alt="Top Languages" style="max-width: 100%; height: auto;" />
+      </td>
+    </tr>
+  </table>
 </div>
+
+<br />
 
 <div align="center">
   <img src="https://github-profile-maker.vercel.app/api/streak?username=giakietkevin&theme=catppuccin_mocha&hide_border=true&border_radius=12" alt="GitHub Streak" />
 </div>
-
 <div align="center">
   <img src="https://github-profile-maker.vercel.app/api/activity?username=giakietkevin&theme=tokyonight&hide_border=true" alt="Activity Graph" />
 </div>
