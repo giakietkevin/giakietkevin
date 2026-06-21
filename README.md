@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://github-profile-maker.vercel.app/api/capsule?type=waving&color=f00000&colorEnd=f4fbfa&height=200&section=header&text=Full+Stack+Engineer&fontSize=30&fontColor=ffffff&animation=wave&gradientDirection=horizontal&parallax=false&wavePosition=70&waveAmplitude=20&waveSpeed=20&flipWave=false&textAlignX=50&textAlignY=50" />
+  <img src="https://github-profile-maker.vercel.app/api/capsule?type=waving&color=f00000&colorEnd=f4fbfa&height=200&section=header&text=Software+Engineer&fontSize=30&fontColor=ffffff&animation=wave&gradientDirection=horizontal&parallax=false&wavePosition=70&waveAmplitude=20&waveSpeed=20&flipWave=false&textAlignX=50&textAlignY=50" />
 </div>
 
 <h1 align="center">I'm Kevin. Nice to meet you ⚡</h1>
