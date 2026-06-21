@@ -2,6 +2,8 @@
   <img src="https://github-profile-maker.vercel.app/api/capsule?type=waving&color=f00000&colorEnd=f4fbfa&height=200&section=header&text=Software+Engineer&fontSize=30&fontColor=ffffff&animation=wave&gradientDirection=horizontal&parallax=false&wavePosition=70&waveAmplitude=20&waveSpeed=20&flipWave=false&textAlignX=50&textAlignY=50" />
 </div>
 
+
+
 <h1 align="center">I'm Kevin. Nice to meet you ⚡</h1>
 
 <div align="center">
@@ -16,10 +18,6 @@ I enjoy exploring new technologies, building modern applications, and solving ch
 ⚡ I thrive on clean code, creative solutions, and continuous learning
 🎯 My goal: build impactful software that makes a difference
 ☕ Fun fact: while(coffee) { code(); } 🖤</p>
-
-<div align="center">
-  [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/https://www.linkedin.com/in/gia-kiet-it-337342365/) [![Instagram](https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://instagram.com/https://www.instagram.com/vgiakiwt_03/) [![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:giakiethcb1@gmail.com)
-</div>
 
 <div align="center">
   <img src="https://github-profile-maker.vercel.app/api/divider?bgType=gradient&thickness=2&alignment=center&bgSolidColor=CBA6F7&bgStartColor=CBA6F7&bgEndColor=94E2D5&bgGradientDirection=horizontal" alt="Divider" />
@@ -51,3 +49,26 @@ I enjoy exploring new technologies, building modern applications, and solving ch
 <div align="center">
   <img src="https://github-profile-maker.vercel.app/api/activity?username=giakietkevin&theme=tokyonight&hide_border=true" alt="Activity Graph" />
 </div>
+
+<div align="center">
+  <img src="https://github-profile-maker.vercel.app/api/divider?bgType=gradient&thickness=2&alignment=center&bgSolidColor=CBA6F7&bgStartColor=CBA6F7&bgEndColor=94E2D5&bgGradientDirection=horizontal" alt="Divider" />
+</div>
+
+<h2 align="center">Connect with Me 🤝</h2>
+
+<div align="center">
+  <a href="mailto:giakiethcb1@gmail.com" target="_blank">
+    <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" />
+  </a>
+  <a href="tel:+84905884303" target="_blank">
+    <img src="https://img.shields.io/badge/Phone-4CAF50?style=for-the-badge&logo=whatsapp&logoColor=white" alt="Phone" />
+  </a>
+  <a href="https://www.facebook.com/giakiet1803/" target="_blank">
+    <img src="https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white" alt="Facebook" />
+  </a>
+  <a href="https://www.instagram.com/vgiakiwt_03/" target="_blank">
+    <img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white" alt="Instagram" />
+  </a>
+</div>
+
+<br />
