@@ -7,7 +7,7 @@
 <h1 align="center">I'm Kevin. Nice to meet you ⚡</h1>
 
 <div align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=22&duration=3000&pause=1000&color=7D0707&center=true&vCenter=true&width=500&height=30&lines=React%20%C2%B7%20Next.js%20%C2%B7%20TypeScript%3BNode.js%20%C2%B7%20PostgreSQL%20%3BC%2B%2B%C2%B7%20C%23" alt="Typing SVG" />
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=22&duration=3000&pause=1000&color=7D0707&center=true&vCenter=true&width=500&height=30&lines=React%20%C2%B7%20Python%20%C2%B7%20Javascript%3BDocker%20%C2%B7%20PostgreSQL%20%3BC%2B%2B%C2%B7%20C%23" alt="Typing SVG" />
 </div>
 
 <p align="center">✨ I'm a Software Engineer who loves turning ideas into reality through code.
