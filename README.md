@@ -24,11 +24,11 @@ I enjoy exploring new technologies, building modern applications, and solving ch
 </div>
 
 <div align="center">
-  <img src="https://skillicons.dev/icons?i=html,css,js,ts,react,nextjs,tailwind,nodejs,mysql,docker,cs&perline=10&theme=dark" />
+  <img src="https://skillicons.dev/icons?i=html,css,js,nextjs,tailwind,nodejs,mysql,docker,cs&perline=10&theme=dark" />
 </div>
 
 <div align="center">
-  <img src="https://skillicons.dev/icons?i=nodejs,express,nestjs,python,fastapi,postgres,mysql,mongodb,redis,graphql&perline=10&theme=dark" />
+  <img src="https://skillicons.dev/icons?i=nodejs,express,python,fastapi,postgres,mysql,mongodb&perline=10&theme=dark" />
 </div>
 
 <div align="center">
