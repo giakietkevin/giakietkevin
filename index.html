@@ -949,7 +949,7 @@ Chu kỳ mồi thành công gần đây (Tối đa 5 phôi trước khi lên)
                         </div>
                     </div>
                     <div class="flex items-center gap-xs min-w-[90px] justify-end">
-                        <span class="font-label-caps text-label-caps ${vach >= 1.0 ? 'text-secondary-fixed-dim' : vach > 0 ? 'text-amber-500' : 'text-error'}">${vach.toFixed(2)} vạch</span>
+                        <span id="fodder-vach-${index}" class="font-label-caps text-label-caps ${vach >= 1.0 ? 'text-secondary-fixed-dim' : vach > 0 ? 'text-amber-500' : 'text-error'}">${vach.toFixed(2)} vạch</span>
                         <button class="text-error/60 hover:text-error transition-colors" data-remove-fodder="${index}" title="Xóa phôi">
                             <span class="material-symbols-outlined" style="font-size: 18px;">close</span>
                         </button>
@@ -1078,15 +1078,10 @@ Chu kỳ mồi thành công gần đây (Tối đa 5 phôi trước khi lên)
                 state.gaugeFodders.forEach((fodderOVR, index) => {
                     const diff = fodderOVR - playerOVR;
                     const vach = getVachFromDiff(diff);
-                    const label = container.querySelector(`span[data-fodder-idx="${index}"]`);
-                    if (label) {
-                        // Find the vạch indicator element in the row
-                        const row = label.closest('div');
-                        const vachSpan = row.querySelector('.font-label-caps.text-label-caps');
-                        if (vachSpan) {
-                            vachSpan.textContent = `${vach.toFixed(2)} vạch`;
-                            vachSpan.className = `font-label-caps text-label-caps ${vach >= 1.0 ? 'text-secondary-fixed-dim' : vach > 0 ? 'text-amber-500' : 'text-error'}`;
-                        }
+                    const vachSpan = document.getElementById(`fodder-vach-${index}`);
+                    if (vachSpan) {
+                        vachSpan.textContent = `${vach.toFixed(2)} vạch`;
+                        vachSpan.className = `font-label-caps text-label-caps ${vach >= 1.0 ? 'text-secondary-fixed-dim' : vach > 0 ? 'text-amber-500' : 'text-error'}`;
                     }
                 });
             }
