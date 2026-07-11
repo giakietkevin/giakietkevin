@@ -1,0 +1,46 @@
+# Nội dung file .github/workflows/update_stats.yml đã tối ưu
+
+name: Update Profile Stats
+
+on:
+  # Chạy theo lịch trình: mỗi ngày một lần (lúc 0h UTC)
+  schedule:
+    - cron: '0 0 * * *'
+  # Cho phép chạy thủ công
+  workflow_dispatch:
+
+jobs:
+  update-metrics: # Đổi tên job thành metrics để phản ánh chức năng
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      # BƯỚC QUAN TRỌNG: Sử dụng lowlighter/metrics với cấu hình tối giản
+      - name: Generate and Update GitHub Metrics (Private Included)
+        uses: lowlighter/metrics@latest
+        with:
+          # TOKEN được sử dụng để lấy dữ liệu private
+          token: ${{ secrets.GH_TOKEN }} 
+          
+          # Tên người dùng GitHub
+          user: giakietit
+          
+          # Tắt tất cả các plugin không cần thiết để tăng tốc
+          plugin_isocalendar: yes # BẬT: Đồ thị đóng góp (Contribution Graph)
+          plugin_isocalendar_duration: full-year
+          
+          # Cấu hình để hiển thị Private commits (Cần token)
+          config_committer_token: ${{ secrets.GH_TOKEN }}
+          
+          # Tắt các plugin mặc định nặng nề
+          plugin_achievements: no
+          plugin_lines: no
+          plugin_languages: no
+          plugin_introduction: no
+          
+          # Output file name (Mặc định là README.md)
+          output_name: metrics.svg # THAY ĐỔI: TẠO FILE SVG ĐỘC LẬP (Xem bước 2)
+          
+      # BỎ QUA bước commit vì chúng ta đang dùng thẻ hình ảnh bên ngoài (SVG)
+      # Giữ nguyên các thẻ stats hiện tại trong README.md
