@@ -1,12 +1,4 @@
-<<<<<<< HEAD
----
-title: ToolFCO
-emoji: 🚀
-colorFrom: blue
-colorTo: indigo
-sdk: docker
-pinned: false
----
+
 
 # 💫 About Me:
 <p align="center">
@@ -153,4 +145,4 @@ I enjoy exploring new technologies, building modern applications, and solving ch
 </div>
 
 <br />
->>>>>>> 6386d188085421411474c75018b887b521092674
+
