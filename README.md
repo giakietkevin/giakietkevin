@@ -38,7 +38,7 @@ I enjoy exploring new technologies, building modern applications, and solving ch
 
 ## 📊 GitHub Stats:
 <p align="center">
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=giakietkevin&theme=dark" alt="Streak Stats" />
+ <img src="https://github-readme-streak-stats.vercel.app/?user=giakietkevin&theme=catppuccin_mocha&hide_border=true&border_radius=12" alt="GitHub Streak" />
 </p>
 
 
